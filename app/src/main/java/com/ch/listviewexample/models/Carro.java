@@ -1,6 +1,9 @@
 package com.ch.listviewexample.models;
 
-public class Carro {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Carro implements Parcelable {
     private String nombre;
     private String modelo;
     private String cilindraje;
@@ -14,6 +17,26 @@ public class Carro {
         this.valor = valor;
         this.imagen = imagen;
     }
+
+    protected Carro(Parcel in) {
+        nombre = in.readString();
+        modelo = in.readString();
+        cilindraje = in.readString();
+        valor = in.readString();
+        imagen = in.readString();
+    }
+
+    public static final Creator<Carro> CREATOR = new Creator<Carro>() {
+        @Override
+        public Carro createFromParcel(Parcel in) {
+            return new Carro(in);
+        }
+
+        @Override
+        public Carro[] newArray(int size) {
+            return new Carro[size];
+        }
+    };
 
     public String getNombre() {
         return nombre;
@@ -53,5 +76,19 @@ public class Carro {
 
     public void setImagen(String imagen) {
         this.imagen = imagen;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(nombre);
+        dest.writeString(modelo);
+        dest.writeString(cilindraje);
+        dest.writeString(valor);
+        dest.writeString(imagen);
     }
 }

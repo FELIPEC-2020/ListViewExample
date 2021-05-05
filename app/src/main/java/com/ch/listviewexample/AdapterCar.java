@@ -57,7 +57,7 @@ public class AdapterCar extends BaseAdapter {
         cilindrajeCarro.setText(objElemento.getCilindraje());
         modeloCarro.setText(objElemento.getModelo());
         Picasso.get()
-                .load("")
+                .load(objElemento.getImagen())
                 .resize(120, 110)
                 .centerCrop()
                 .error(R.mipmap.ic_launcher)
